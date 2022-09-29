@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Sharma
- *
- */
-module AggregationDemo {
-}
