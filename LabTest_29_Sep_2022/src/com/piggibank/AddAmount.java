@@ -15,9 +15,9 @@ public class AddAmount {
 		System.out.println("Your Piggie Bank is created with amount $50");
 		System.out.println("Total Amount : $" + pBank.getTotalAmount());
 
-		// There is no limit on the amount the user wants to add to the piggy bank
+		// enless loop to add money in the Piggy bank
 		while (true) {
-			System.out.println("How money much you want to add");
+			System.out.println("Enter Amount, you want to add");
 			pBank.setTotalAmount(sc.nextDouble());
 			System.out.println("------------------------\nTotal Amount : $" + pBank.getTotalAmount()
 					+ "\n------------------------");
