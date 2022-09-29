@@ -5,7 +5,7 @@ public class TestBook {
 	// main method
 	public static void main(String[] args) {
 
-		// creating object of Book class
+		// creating array of Book object
 		Book book[] = new Book[3];
 
 		// adding book details
