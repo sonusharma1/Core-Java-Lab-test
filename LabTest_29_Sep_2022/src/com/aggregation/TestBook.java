@@ -15,8 +15,7 @@ public class TestBook {
 
 		// displaying book details
 		for (int i = 0; i < book.length; i++) {
-			System.out.println(book[i].getBookName() + "     " + book[i].getAuthor().getAuthorName() + "     "
-					+ book[i].getPrice());
+			System.out.println(book[i].getBookName() + "     " + book[i].getAuthor().getAuthorName() + "     "+ book[i].getPrice());
 		}
 	}
 
