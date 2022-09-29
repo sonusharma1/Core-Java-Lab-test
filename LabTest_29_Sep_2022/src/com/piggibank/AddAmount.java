@@ -19,8 +19,7 @@ public class AddAmount {
 		while (true) {
 			System.out.println("Enter Amount, you want to add");
 			pBank.setTotalAmount(sc.nextDouble());
-			System.out.println("------------------------\nTotal Amount : $" + pBank.getTotalAmount()
-					+ "\n------------------------");
+			System.out.println("------------------------\nTotal Amount : $" + pBank.getTotalAmount()+ "\n------------------------");
 		}
 
 	}
