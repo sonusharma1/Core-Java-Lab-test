@@ -15,7 +15,7 @@ public class AddAmount {
 		System.out.println("Your Piggie Bank is created with amount $50");
 		System.out.println("Total Amount : $" + pBank.getTotalAmount());
 
-		// enless loop to add money in the Piggy bank
+		// endless loop to add money in the Piggie bank
 		while (true) {
 			System.out.println("Enter Amount, you want to add");
 			pBank.setTotalAmount(sc.nextDouble());
