@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*
 Program :  Write a program to print sum of even and odd numbers using varargs.
 @author : Sonu Sharma
-@Date	: 22 Sep 2022
+@Date	: 29 Sep 2022
 */
 
 public class SumOfEvenOdd {
