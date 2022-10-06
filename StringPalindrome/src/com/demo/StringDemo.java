@@ -27,7 +27,7 @@ public class StringDemo {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter a word");
 
-		// calling method and also taking input from user.
+		// calling method and also taking input from user
 		isPalindrome(sc.next());
 
 	}
