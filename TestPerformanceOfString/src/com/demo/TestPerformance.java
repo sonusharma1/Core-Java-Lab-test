@@ -30,7 +30,7 @@ public class TestPerformance {
 		double elapsedTime = (stopTime - startTime) / 1000;
 		System.out.println("Time taken by StringBuffer " + elapsedTime + " sec");
 
-		// calculating time taken by StringBuilder
+		// calculating time taken by StringBuilder.
 		startTime = System.currentTimeMillis();
 		builderTime();
 		stopTime = System.currentTimeMillis();
