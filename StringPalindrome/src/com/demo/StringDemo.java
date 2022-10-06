@@ -1,5 +1,11 @@
 package com.demo;
 
+/**
+Program : Write a code to check a string is palindrome or not	
+@author : Sonu Sharma
+@date   : 6 Oct 2022
+*/
+
 import java.util.Scanner;
 
 public class StringDemo {
