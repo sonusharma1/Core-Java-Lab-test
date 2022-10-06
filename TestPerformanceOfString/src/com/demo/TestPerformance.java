@@ -2,6 +2,7 @@ package com.demo;
 
 public class TestPerformance {
 
+	// method to perform stress test on StringBuffer class
 	static void bufferTime() {
 
 		StringBuffer strBuffer = new StringBuffer();
@@ -10,6 +11,7 @@ public class TestPerformance {
 		}
 	}
 
+	// method to perform stress test on StringBuilder class
 	static void builderTime() {
 
 		StringBuilder strBuilder = new StringBuilder();
@@ -21,18 +23,20 @@ public class TestPerformance {
 	public static void main(String[] args) {
 
 		// calculating time taken by StringBuffer
-		long startTime = System.currentTimeMillis();
+		double startTime = System.currentTimeMillis();
 		bufferTime();
-		long stopTime = System.currentTimeMillis();
-		long elapsedTime = stopTime - startTime;
-		System.out.println("Time taken by StringBuffer " + elapsedTime);
+		double stopTime = System.currentTimeMillis();
+
+		double elapsedTime = (stopTime - startTime) / 1000;
+		System.out.println("Time taken by StringBuffer " + elapsedTime + " sec");
 
 		// calculating time taken by StringBuilder
 		startTime = System.currentTimeMillis();
 		builderTime();
 		stopTime = System.currentTimeMillis();
-		elapsedTime = stopTime - startTime;
-		System.out.println("Time taken by StringBuilder " + elapsedTime);
+
+		elapsedTime = (stopTime - startTime) / 1000;
+		System.out.println("Time taken by StringBuilder " + elapsedTime + " sec");
 	}
 
 }
