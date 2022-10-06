@@ -5,5 +5,5 @@
  * @author Sharma
  *
  */
-module StringPalindromeDemo {
+module StringPalindrome {
 }
