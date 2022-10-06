@@ -1,5 +1,12 @@
 package com.demo;
 
+/**
+ * Program : Compare string builder and string Buffer using performance test *
+ * 
+ * @author : Sonu Sharma
+ * @date : 6 Oct 2022
+ */
+
 public class TestPerformance {
 
 	// method to perform stress test on StringBuffer class
