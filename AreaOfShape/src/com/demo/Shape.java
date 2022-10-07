@@ -2,22 +2,11 @@ package com.demo;
 
 public abstract class Shape {
 
-	protected double length, breadth, side, radius;
+	// declaring abstract methods
 
-	public double rectangleArea(double length, double bredth) {
+	public abstract double rectangleArea(double length, double bredth);
 
-		this.length = length;
-		this.breadth = bredth;
-		return this.length * this.breadth;
-	}
+	public abstract double squareArea(double side);
 
-	public double squareArea(double side) {
-		this.side = side;
-		return this.side * this.side;
-	}
-
-	public double circleArea(double radius) {
-		this.radius = radius;
-		return 3.14 * this.radius * this.radius;
-	}
+	public abstract double circleArea(double radius);
 }

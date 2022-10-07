@@ -26,6 +26,8 @@ public class Test {
 		// to calculate area of square
 		System.out.println("\n\n--------------------------------------------\n\nEnter Radius of a circle");
 		System.out.print("Area of Circle = " + String.format("%.4g%n", shapeArea.circleArea(sc.nextDouble())));
+
+		sc.close();
 	}
 
 	public static void main(String[] args) {
