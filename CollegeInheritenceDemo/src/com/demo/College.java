@@ -12,7 +12,7 @@ public class College extends Student {
 	// method to calculate CGPA
 	public double calculateCgpa() {
 
-		int cgpa = (int) (percentageMarks() / 100 * 9.5);
+		double cgpa = (percentageMarks() / 100 * 9.5);
 		return cgpa;
 	}
 }

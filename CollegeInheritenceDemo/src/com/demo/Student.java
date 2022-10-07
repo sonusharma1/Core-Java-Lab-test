@@ -33,7 +33,7 @@ public class Student {
 	}
 	// getter and setter end
 
-	// method to calculate average marks
+	// method to calculate percentage marks
 	protected double percentageMarks() {
 		return 0;
 	}

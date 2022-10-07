@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class StudentDetails {
 
-	static Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 
 	College collegeStu[];
 	School schoolStu[];
@@ -23,7 +23,7 @@ public class StudentDetails {
 			System.out.println("\nEnter Student Name");
 			collegeStu[i].setName(sc.next());
 
-			System.out.println("\nEnter Total Obtained Marks out of 550");
+			System.out.println("\nEnter Total Obtained Marks out of 650");
 			collegeStu[i].setTotalMarksObtained(sc.nextDouble());
 		}
 	}
@@ -56,7 +56,7 @@ public class StudentDetails {
 			System.out.println("\nEnter Student Name");
 			schoolStu[i].setName(sc.next());
 
-			System.out.println("\nEnter Total Obtained Marks out of 650");
+			System.out.println("\nEnter Total Obtained Marks out of 550");
 			schoolStu[i].setTotalMarksObtained(sc.nextDouble());
 		}
 	}
