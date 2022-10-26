@@ -23,10 +23,13 @@ public class EmployeeDaoImple implements EmployeeDao {
 
 		// taking input
 		System.out.println("Enter Employee ID : ");
+
 		employee.setId(sc.nextInt());
 		System.out.println("Enter Employee Name : ");
+
 		employee.setName(sc.next());
 		System.out.println("Enter Employee Slaray : ");
+
 		employee.setSalary(sc.nextDouble());
 
 		// adding employee details into ArrayList
