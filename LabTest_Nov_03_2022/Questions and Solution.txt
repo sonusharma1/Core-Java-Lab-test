@@ -1,0 +1,371 @@
+1. Insert 10 employees, 5 projects and 3 dept
+
+mysql> select * from dept;
++-----+-------------------+-----------+
+| dId | dName             | dLocation |
++-----+-------------------+-----------+
+| d01 | Development       | Mumbai    |
+| d02 | Sales & Marketing | Delhi     |
+| d03 | Training          | Chennai   |
++-----+-------------------+-----------+
+3 rows in set (0.00 sec)
+
+
+mysql> select * from project
+    -> ;
++-----+--------------+----------+
+| pId | pName        | budget   |
++-----+--------------+----------+
+| p01 | Java Desktop | 45000.00 |
+| p02 | Java Web     | 35000.00 |
+| p03 | PHP          | 15000.00 |
+| p04 | Python       | 40000.00 |
+| p05 | AWS          | 28000.00 |
++-----+--------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-----+--------+-------------------+-----------+-------+-------+
+| eId | ename  | designation       | eSalary   | depId | proId |
++-----+--------+-------------------+-----------+-------+-------+
+|   1 | Sonu   | Manager           | 150000.00 | d01   | p05   |
+|   2 | Palis  | Manager           | 160000.00 | d02   | p01   |
+|   3 | Sujal  | Trainer           |  90000.00 | d03   | p04   |
+|   4 | Olivia | Senior Developer  | 100000.00 | d01   | p05   |
+|   5 | Emma   | Developer         |  70000.00 | d01   | p05   |
+|   6 | Lucy   | Tester            |  50000.00 | d01   | p05   |
+|   7 | Ava    | QA                |  80000.00 | d01   | p05   |
+|   8 | Tom    | Degital Marketing |  65000.00 | d02   | p01   |
+|   9 | Rudra  | UIUX              |  50000.00 | d01   | p03   |
+|  10 | Akshat | Trainer           |  78000.00 | d03   | p02   |
++-----+--------+-------------------+-----------+-------+-------+
+10 rows in set (0.00 sec)
+
+Show all the employee
+
+mysql> select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dLocation, p.pName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId;
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+| eid | ename  | designation       | esalary   | dName             | dLocation | pName        | budget   |
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+|   1 | Sonu   | Manager           | 150000.00 | Development       | Mumbai    | AWS          | 28000.00 |
+|   2 | Palis  | Manager           | 160000.00 | Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+|   3 | Sujal  | Trainer           |  90000.00 | Training          | Chennai   | Python       | 40000.00 |
+|   4 | Olivia | Senior Developer  | 100000.00 | Development       | Mumbai    | AWS          | 28000.00 |
+|   5 | Emma   | Developer         |  70000.00 | Development       | Mumbai    | AWS          | 28000.00 |
+|   6 | Lucy   | Tester            |  50000.00 | Development       | Mumbai    | AWS          | 28000.00 |
+|   7 | Ava    | QA                |  80000.00 | Development       | Mumbai    | AWS          | 28000.00 |
+|   8 | Tom    | Degital Marketing |  65000.00 | Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+|   9 | Rudra  | UIUX              |  50000.00 | Development       | Mumbai    | PHP          | 15000.00 |
+|  10 | Akshat | Trainer           |  78000.00 | Training          | Chennai   | Java Web     | 35000.00 |
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+2. Show all the employee with manager role and location Mumbai
+
+mysql> select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dlocation, p.pName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where e.designation = "Manager" and d.dLocation = "Mumbai";
++-----+-------+-------------+-----------+-------------+-----------+-------+----------+
+| eid | ename | designation | esalary   | dName       | dlocation | pName | budget   |
++-----+-------+-------------+-----------+-------------+-----------+-------+----------+
+|   1 | Sonu  | Manager     | 150000.00 | Development | Mumbai    | AWS   | 28000.00 |
++-----+-------+-------------+-----------+-------------+-----------+-------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+3.Update salary by 10% where budget>20000
+
+mysql> select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dlocation, p.pName, p.budget  from emp e left join dept d on d.did = e.depid left join project p on p.pid = e.proId
+    -> where p.budget>30000;
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+| eid | ename  | designation       | esalary   | dName             | dlocation | pName        | budget   |
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+|   2 | Palis  | Manager           | 160000.00 | Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+|   8 | Tom    | Degital Marketing |  65000.00 | Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+|  10 | Akshat | Trainer           |  78000.00 | Training          | Chennai   | Java Web     | 35000.00 |
+|   3 | Sujal  | Trainer           |  90000.00 | Training          | Chennai   | Python       | 40000.00 |
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+4 rows in set (0.01 sec)
+
+mysql> update emp e join project p on p.pid = e.proId
+    -> set e.esalary = e.esalary + (e.esalary*10/100)
+    -> where p.budget>30000;
+Query OK, 4 rows affected (0.37 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dlocation, p.pName, p.budget  from emp e left join dept d on d.did = e.depid left join project p on p.pid = e.proId
+    -> where p.budget>30000;
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+| eid | ename  | designation       | esalary   | dName             | dlocation | pName        | budget   |
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+|   2 | Palis  | Manager           | 176000.00 | Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+|   8 | Tom    | Degital Marketing |  71500.00 | Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+|  10 | Akshat | Trainer           |  85800.00 | Training          | Chennai   | Java Web     | 35000.00 |
+|   3 | Sujal  | Trainer           |  99000.00 | Training          | Chennai   | Python       | 40000.00 |
++-----+--------+-------------------+-----------+-------------------+-----------+--------------+----------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+4. Add a new column in project : hours nedded
+
+mysql> alter table project
+    -> add column hours_needed int;
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc project;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| pId          | varchar(20)  | NO   | PRI | NULL    |       |
+| pName        | varchar(100) | NO   |     | NULL    |       |
+| budget       | float(10,2)  | YES  |     | NULL    |       |
+| hours_needed | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+
+
+
+
+5. Alter the name of pname to projectName
+
+mysql> alter table project
+    -> rename column pname to projectName;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc project;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| pId          | varchar(20)  | NO   | PRI | NULL    |       |
+| projectName  | varchar(100) | NO   |     | NULL    |       |
+| budget       | float(10,2)  | YES  |     | NULL    |       |
+| hours_needed | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+6.Show all the employee working for java web project in New Delhi
+
+mysql> select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dlocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where p.projectName="Java Web";
++-----+--------+-------------+----------+----------+-----------+-------------+----------+
+| eid | ename  | designation | esalary  | dName    | dlocation | projectName | budget   |
++-----+--------+-------------+----------+----------+-----------+-------------+----------+
+|  10 | Akshat | Trainer     | 85800.00 | Training | Chennai   | Java Web    | 35000.00 |
++-----+--------+-------------+----------+----------+-----------+-------------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+7. Show all the project with descreasing budget
+
+mysql> select * from project
+    -> order by budget desc;
++-----+--------------+----------+--------------+
+| pId | projectName  | budget   | hours_needed |
++-----+--------------+----------+--------------+
+| p01 | Java Desktop | 45000.00 |         NULL |
+| p04 | Python       | 40000.00 |         NULL |
+| p02 | Java Web     | 35000.00 |         NULL |
+| p05 | AWS          | 28000.00 |         NULL |
+| p03 | PHP          | 15000.00 |         NULL |
++-----+--------------+----------+--------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+8. Show all project with increasing project where location  is chennai
+
+mysql> select d.dName, d.dlocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> order by p.budget;
++-------------------+-----------+--------------+----------+
+| dName             | dlocation | projectName  | budget   |
++-------------------+-----------+--------------+----------+
+| Development       | Mumbai    | PHP          | 15000.00 |
+| Development       | Mumbai    | AWS          | 28000.00 |
+| Development       | Mumbai    | AWS          | 28000.00 |
+| Development       | Mumbai    | AWS          | 28000.00 |
+| Development       | Mumbai    | AWS          | 28000.00 |
+| Development       | Mumbai    | AWS          | 28000.00 |
+| Training          | Chennai   | Java Web     | 35000.00 |
+| Training          | Chennai   | Python       | 40000.00 |
+| Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
+| Sales & Marketing | Delhi     | Java Desktop | 45000.00 |
++-------------------+-----------+--------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select d.dName, d.dlocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where d.dlocation="Chennai"
+    -> order by p.budget;
++----------+-----------+-------------+----------+
+| dName    | dlocation | projectName | budget   |
++----------+-----------+-------------+----------+
+| Training | Chennai   | Java Web    | 35000.00 |
+| Training | Chennai   | Python      | 40000.00 |
++----------+-----------+-------------+----------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+9. Show all the employees working in dname: Developer with designation Senior Developer
+
+mysql> select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dlocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where d.dName="Development" and e.designation="Senior Developer";
++-----+--------+------------------+-----------+-------------+-----------+-------------+----------+
+| eid | ename  | designation      | esalary   | dName       | dlocation | projectName | budget   |
++-----+--------+------------------+-----------+-------------+-----------+-------------+----------+
+|   4 | Olivia | Senior Developer | 100000.00 | Development | Mumbai    | AWS         | 28000.00 |
++-----+--------+------------------+-----------+-------------+-----------+-------------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+10. Count the number of Java projects in Chennai.
+
+mysql> select d.dLocation, p.projectName
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where p.projectName like "Java%" and d.dLocation="Chennai";
++-----------+-------------+
+| dLocation | projectName |
++-----------+-------------+
+| Chennai   | Java Web    |
++-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(d.dName) as "Java projects in Chennai"
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where p.projectName like "Java%" and d.dLocation="Chennai";
++--------------------------+
+| Java projects in Chennai |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+11. Calculate the total salary and total expenditure of project in various department
+
+mysql> select d.dName as "Department", sum(e.esalary) as "Total Salary", sum(p.budget) as "Total Project Budget"
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> group by d.dName;
++-------------------+--------------+----------------------+
+| Department        | Total Salary | Total Project Budget |
++-------------------+--------------+----------------------+
+| Development       |    500000.00 |            155000.00 |
+| Sales & Marketing |    247500.00 |             90000.00 |
+| Training          |    184800.00 |             75000.00 |
++-------------------+--------------+----------------------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+12. update the project budget by 5% for all projects of New Delhi
+
+mysql> select d.dLocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where d.dLocation="Delhi";
++-----------+--------------+----------+
+| dLocation | projectName  | budget   |
++-----------+--------------+----------+
+| Delhi     | Java Desktop | 45000.00 |
+| Delhi     | Java Desktop | 45000.00 |
++-----------+--------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> update emp e
+    -> join project p on p.pid = e.proid
+    -> join dept d on d.did = e.depid
+    -> set p.budget = p.budget * 105 / 100
+    -> where d.dLocation="Delhi"
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select d.dLocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where d.dLocation="Delhi";
++-----------+--------------+----------+
+| dLocation | projectName  | budget   |
++-----------+--------------+----------+
+| Delhi     | Java Desktop | 47250.00 |
+| Delhi     | Java Desktop | 47250.00 |
++-----------+--------------+----------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+13. Show all the employees working in Chennai where project starts with Java.
+
+mysql> select e.ename, d.dLocation, p.projectName, p.budget
+    -> from emp e
+    -> left join dept d on d.did = e.depid
+    -> left join project p on p.pid = e.proId
+    -> where p.projectName like "Java%" and d.dLocation="Chennai";
++--------+-----------+-------------+----------+
+| ename  | dLocation | projectName | budget   |
++--------+-----------+-------------+----------+
+| Akshat | Chennai   | Java Web    | 35000.00 |
++--------+-----------+-------------+----------+
+1 row in set (0.00 sec)

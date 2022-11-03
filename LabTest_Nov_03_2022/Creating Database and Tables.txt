@@ -1,0 +1,107 @@
+mysql> create database companyABC;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bookstore          |
+| companyabc         |
+| facebookdb         |
+| google             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> use companyABC;
+Database changed
+
+mysql> create table dept (
+    -> deptId varchar(20) primary key not null,
+    -> dName varchar(80) not null,
+    -> dLocation varchar(80) not null
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table project (
+    -> pId varchar(20) primary key not null,
+    -> pName varchar(100) not null,
+    -> budget float(10,2));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> create table emp (
+    -> eId int primary key not null auto_increment,
+    -> ename varchar(80) not null,
+    -> designation varchar(80) not null,
+	-> eSalary float(10,2),
+    -> depId varchar(20),
+    -> proId varchar(20),
+    -> foreign key(depId) references dept(deptId),
+    -> foreign key(proId) references project(pid)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc dept;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dId       | varchar(20) | NO   | PRI | NULL    |       |
+| dName     | varchar(80) | NO   |     | NULL    |       |
+| dLocation | varchar(80) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc project;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| pId    | varchar(20)  | NO   | PRI | NULL    |       |
+| pName  | varchar(100) | NO   |     | NULL    |       |
+| budget | float(10,2)  | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+3 rows in set (0.00 sec)
+
+mysql> desc emp;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| eId         | int         | NO   | PRI | NULL    | auto_increment |
+| ename       | varchar(80) | NO   |     | NULL    |                |
+| designation | varchar(80) | NO   |     | NULL    |                |
+| eSalary     | float(10,2) | YES  |     | NULL    |                |
+| depId       | varchar(20) | YES  | MUL | NULL    |                |
+| proId       | varchar(20) | YES  | MUL | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table dept
+    -> rename column  deptId to dId;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc dept;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dId       | int         | NO   | PRI | NULL    |       |
+| dName     | varchar(80) | NO   |     | NULL    |       |
+| dLocation | varchar(80) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into dept values
+    -> ("d01","Development","Mumbai");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into dept values
+    -> ("d02","Sales & Marketing","Delhi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into dept values
+    -> ("d03","Training","Chennai");
+Query OK, 1 row affected (0.00 sec)
+

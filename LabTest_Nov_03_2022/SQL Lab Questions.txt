@@ -1,0 +1,30 @@
+Q3.Create a data base companyABC
+1. create 3 tables :
+emp(eno,ename,salary,designation,pno,dno)
+project(pno, pname, budget,dno)
+dept(dno,dname,location)
+
+Create the following Queries:
+1. Insert 10 employees, 5 projects and 3 dept
+2. Show all the employee with manager role and location Mumbai
+3.Update salary by 10% where budget>20000
+4. Add a new column in project : hours nedded
+5. Alter the name of pname to projectName
+6.Show all the employee working for java web project in New Delhi
+7. Show all the project with descreasing budget
+8. Show all project with increasing project where location  is chennai
+9Show all the employees working in dname: Developer with designation Senior Developer
+10. Count the number of Java projects in Chennai.
+11. Calculate the total salary and total expenditure of project in various department
+12. update the project budget by 5% for all projects of New Delhi
+13. Show all the employees working in Chennai where project starts with Java.
+Shuruti Singhal14:19
+Designation: Manager. Developer, SeniorDeveloper, Tester, QualityAnalyst
+Pname: Java Desktop, Java Web, PHP, Python, AWS
+Budget: 10,000- 50,000
+Location: New Delhi, Mumbai, Chennai
+Wasim Khan.11115:02
+yes mam
+
+
+select e.eid, e.ename, e.designation, e.esalary, d.dName, d.dlocation, p.pName, p.budget  from emp e left join dept d on d.did = e.depid left join project p on p.pid = e.proId;
