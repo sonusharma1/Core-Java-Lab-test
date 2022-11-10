@@ -1,0 +1,172 @@
+mysql> create database hospital;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> use hospital
+Database changed
+mysql> create table doctor (
+    -> did varchar(20) primary key not null,
+    -> dname varchar(80) not null,
+    -> doctor_specialty varchar(100) not null);
+Query OK, 0 rows affected (0.06 sec)
+
+
+mysql> desc doctor;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| did              | varchar(20)  | NO   | PRI | NULL    |       |
+| dname            | varchar(80)  | NO   |     | NULL    |       |
+| doctor_specialty | varchar(100) | NO   |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+
+
+
+
+
+mysql> create table patient (
+    -> pid int primary key not null auto_increment,
+    -> pname varchar(80) not null,
+    -> paddress varchar(80) not null,
+    -> did varchar(20),
+    -> foreign key(did) references doctor(did));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc patient;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| pid      | int         | NO   | PRI | NULL    | auto_increment |
+| pname    | varchar(80) | NO   |     | NULL    |                |
+| paddress | varchar(80) | NO   |     | NULL    |                |
+| did      | varchar(20) | YES  | MUL | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+
+
+mysql> select * from doctor;
++-----+----------------+------------------+
+| did | dname          | doctor_specialty |
++-----+----------------+------------------+
+| APP | Akshans Pandey | Pediatrician     |
+| NYD | Nilesh Yadav   | Dermatologist    |
+| RPD | Ravindra Pal   | Dermatologist    |
+| SSP | Sonu Sharma    | Surgeon          |
++-----+----------------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from patient;
++-----+-----------+----------+------+
+| pid | pname     | paddress | did  |
++-----+-----------+----------+------+
+|   1 | Sujal     | Patna    | SSP  |
+|   2 | Shubham   | Howrah   | SSP  |
+|   3 | Somnath   | Raniganj | APP  |
+|   4 | Royston   | Kalyan   | NYD  |
+|   5 | Ayan      | kolkata  | RPD  |
+|   6 | Prithwish | kolkata  | NYD  |
++-----+-----------+----------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from patient_amt;
++-----+---------+
+| pid | amount  |
++-----+---------+
+|   2 | 4500.00 |
+|   3 | 6500.00 |
+|   5 | 7500.00 |
++-----+---------+
+3 rows in set (0.00 sec)
+
+
+
+1. Inner Join
+
+mysql> select p.pid, p.pname, p.paddress, d.dname, pa.amount
+    -> from patient p
+    -> left join doctor d on d.did = p.did
+    -> inner join patient_amt pa on p.pid=pa.pid;
++-----+---------+----------+----------------+---------+
+| pid | pname   | paddress | dname          | amount  |
++-----+---------+----------+----------------+---------+
+|   2 | Shubham | Howrah   | Sonu Sharma    | 4500.00 |
+|   3 | Somnath | Raniganj | Akshans Pandey | 6500.00 |
+|   5 | Ayan    | kolkata  | Ravindra Pal   | 7500.00 |
++-----+---------+----------+----------------+---------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+2. Left Join
+
+mysql> select p.pid, p.pname, p.paddress, d.dname, pa.amount
+    -> from patient p
+    -> left join doctor d on d.did = p.did
+    -> left join patient_amt pa on p.pid=pa.pid;
++-----+-----------+----------+----------------+---------+
+| pid | pname     | paddress | dname          | amount  |
++-----+-----------+----------+----------------+---------+
+|   1 | Sujal     | Patna    | Sonu Sharma    |    NULL |
+|   2 | Shubham   | Howrah   | Sonu Sharma    | 4500.00 |
+|   3 | Somnath   | Raniganj | Akshans Pandey | 6500.00 |
+|   4 | Royston   | Kalyan   | Nilesh Yadav   |    NULL |
+|   5 | Ayan      | kolkata  | Ravindra Pal   | 7500.00 |
+|   6 | Prithwish | kolkata  | Nilesh Yadav   |    NULL |
++-----+-----------+----------+----------------+---------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+3. Right join
+
+mysql> select p.pid, p.pname, p.paddress, d.dname, pa.amount
+    -> from patient p
+    -> left join doctor d on d.did = p.did
+    -> right join patient_amt pa on p.pid=pa.pid;
++------+---------+----------+----------------+---------+
+| pid  | pname   | paddress | dname          | amount  |
++------+---------+----------+----------------+---------+
+|    2 | Shubham | Howrah   | Sonu Sharma    | 4500.00 |
+|    3 | Somnath | Raniganj | Akshans Pandey | 6500.00 |
+|    5 | Ayan    | kolkata  | Ravindra Pal   | 7500.00 |
++------+---------+----------+----------------+---------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+4. Full Join
+
+mysql> select p.pid, p.pname, p.paddress, pa.amount
+    -> from patient p
+    -> join patient_amt pa;
++-----+-----------+----------+---------+
+| pid | pname     | paddress | amount  |
++-----+-----------+----------+---------+
+|   1 | Sujal     | Patna    | 7500.00 |
+|   1 | Sujal     | Patna    | 6500.00 |
+|   1 | Sujal     | Patna    | 4500.00 |
+|   2 | Shubham   | Howrah   | 7500.00 |
+|   2 | Shubham   | Howrah   | 6500.00 |
+|   2 | Shubham   | Howrah   | 4500.00 |
+|   3 | Somnath   | Raniganj | 7500.00 |
+|   3 | Somnath   | Raniganj | 6500.00 |
+|   3 | Somnath   | Raniganj | 4500.00 |
+|   4 | Royston   | Kalyan   | 7500.00 |
+|   4 | Royston   | Kalyan   | 6500.00 |
+|   4 | Royston   | Kalyan   | 4500.00 |
+|   5 | Ayan      | kolkata  | 7500.00 |
+|   5 | Ayan      | kolkata  | 6500.00 |
+|   5 | Ayan      | kolkata  | 4500.00 |
+|   6 | Prithwish | kolkata  | 7500.00 |
+|   6 | Prithwish | kolkata  | 6500.00 |
+|   6 | Prithwish | kolkata  | 4500.00 |
++-----+-----------+----------+---------+
+18 rows in set (0.00 sec)
