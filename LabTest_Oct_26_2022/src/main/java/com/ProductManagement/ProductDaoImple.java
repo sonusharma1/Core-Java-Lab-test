@@ -2,6 +2,7 @@ package com.ProductManagement;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class ProductDaoImple implements ProductDao {
@@ -76,16 +77,20 @@ public class ProductDaoImple implements ProductDao {
 		System.out.println("2. sort by quantity");
 		System.out.println("3. sort by price");
 
+		// sort by name using comparator interface
+		Comparator<Product> sortByName = (o1, o2) -> {
+			return o1.getProductName().compareTo(o2.getProductName());
+		};
+
+		// taking input
 		int choice = sc.nextInt();
 
 		// sorting
 		switch (choice) {
 
-		// sort by name
+		// sort by name using comparator interface
 		case 1:
-			Collections.sort(productList, (o1, o2) -> {
-				return o1.getProductName().compareTo(o2.getProductName());
-			});
+			Collections.sort(productList, sortByName);
 			break;
 
 		// sort by quantity
