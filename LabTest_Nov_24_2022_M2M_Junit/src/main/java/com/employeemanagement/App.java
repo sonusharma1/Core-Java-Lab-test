@@ -63,21 +63,29 @@ public class App {
 //		employeeDao.saveEmployee(emp3);
 
 		// to get/search employee
-		Employee searchEmp = employeeDao.getEmployee(3);
+		Employee searchEmp = employeeDao.getEmployee(4);
 		List<Project> emProjects = (List<Project>) searchEmp.getProjects();
-		System.out.println("\n----------------------\nEmployee Details Id = " + 3 + "\n----------------------\n");
-		System.out.println(searchEmp.getEmpId() + " " + searchEmp.getEmpName() + " " + searchEmp.getSalary() + " "
-				+ searchEmp.getEmpName());
-		emProjects.forEach(pl -> System.out.println(pl.getProjectName()));
+
+		System.out.println("\n------------------------------\n" + "ID | Name | Salary | Location"
+				+ "\n------------------------------");
+		System.out.println(searchEmp.getEmpId() + "    " + searchEmp.getEmpName() + "   " + searchEmp.getSalary()
+				+ "   " + searchEmp.getLocation());
+		System.out.println("\n---------\nProjects |\n---------");
+
+		emProjects.forEach(pl -> System.out.print("> " + pl.getProjectName() + "\n"));
 
 		// to update employee
-		searchEmp.setEmpName("Sujal");
+//		searchEmp.setEmpName("Sujal");
 //		employeeDao.updateEmployee(searchEmp);
 
 		// to delete employee
 //		employeeDao.deleteEmployee(6);
 
 		// to increase salary
-		employeeDao.increaseEmployeeSalary(3, 20);
+//		employeeDao.increaseEmployeeSalary(3, 10);
+
+		// to delete project
+//		ProjectDao projectDao = new ProjectDao();
+//		projectDao.deleteProject(6);
 	}
 }

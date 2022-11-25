@@ -30,7 +30,7 @@ public class Employee {
 	@Column(name = "salary")
 	private double salary;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private List<Project> projects;
 
 	public Employee() {

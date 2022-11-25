@@ -17,15 +17,15 @@ class EmployeeDaoTest {
 	// positive test case
 	@Test
 	void incrementOfSalaryCase1() {
-		double oldSalary = employeeDao.getEmployee(2).getSalary();
-		assertThat((oldSalary * 110 / 100)).isEqualTo(employeeDao.increaseEmployeeSalary(2, 10));
+		double oldSalary = employeeDao.getEmployee(5).getSalary();
+		assertThat((oldSalary * 110 / 100)).isEqualTo(employeeDao.increaseEmployeeSalary(5, 10));
 	}
 
 	// negative test case
 	@Test
 	void incrementOfSalaryCase2() {
-		double oldSalary = employeeDao.getEmployee(2).getSalary();
-		assertThat((oldSalary * 120 / 100)).isNotEqualTo(employeeDao.increaseEmployeeSalary(2, 10));
+		double oldSalary = employeeDao.getEmployee(5).getSalary();
+		assertThat((oldSalary * 120 / 100)).isNotEqualTo(employeeDao.increaseEmployeeSalary(5, 10));
 	}
 
 }

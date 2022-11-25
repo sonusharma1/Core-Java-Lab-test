@@ -187,7 +187,7 @@ public class EmployeeDao {
 			}
 			e.printStackTrace();
 		}
-		return employee.getSalary();
+		return getEmployee(id).getSalary();
 	}
 
 }
